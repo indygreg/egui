@@ -269,6 +269,7 @@ impl AppRunner {
                 decorated: _,    // Can't toggle decorations
                 drag_window: _,  // Can't be dragged
                 window_pos: _,   // Can't set position of a web page
+                window_visibility: _, // Can't be made invisible.
             } = app_output;
         }
 

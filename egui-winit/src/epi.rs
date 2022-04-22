@@ -25,6 +25,7 @@ pub fn window_builder(
         multisampling: _,  // used in `fn create_display`
         depth_buffer: _,   // used in `fn create_display`
         stencil_buffer: _, // used in `fn create_display`
+        visible,
     } = native_options;
 
     let window_icon = icon_data.clone().and_then(load_icon);
@@ -35,7 +36,8 @@ pub fn window_builder(
         .with_decorations(*decorated)
         .with_resizable(*resizable)
         .with_transparent(*transparent)
-        .with_window_icon(window_icon);
+        .with_window_icon(window_icon)
+        .with_visible(*visible);
 
     if let Some(min_size) = *min_window_size {
         window_builder = window_builder.with_min_inner_size(points_to_size(min_size));
@@ -97,7 +99,12 @@ pub fn handle_app_output(
         decorated,
         drag_window,
         window_pos,
+        window_visibility,
     } = app_output;
+
+    if let Some(visible) = window_visibility {
+        window.set_visible(visible);
+    }
 
     if let Some(decorated) = decorated {
         window.set_decorations(decorated);

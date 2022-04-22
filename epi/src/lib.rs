@@ -208,6 +208,9 @@ pub struct NativeOptions {
     ///
     /// `egui` doesn't need the stencil buffer, so the default value is 0.
     pub stencil_buffer: u8,
+
+    /// Whether the window is initially visible.
+    pub visible: bool,
 }
 
 impl Default for NativeOptions {
@@ -228,6 +231,7 @@ impl Default for NativeOptions {
             multisampling: 0,
             depth_buffer: 0,
             stencil_buffer: 0,
+            visible: true,
         }
     }
 }
@@ -340,6 +344,11 @@ impl Frame {
     #[doc(hidden)]
     pub fn take_app_output(&mut self) -> crate::backend::AppOutput {
         std::mem::take(&mut self.output)
+    }
+
+    /// Trigger a window visibility update.
+    pub fn set_window_visibility(&mut self, visibility: Option<bool>) {
+        self.output.window_visibility = visibility;
     }
 }
 
@@ -511,5 +520,13 @@ pub mod backend {
 
         /// Set to some position to move the outer window (e.g. glium window) to this position
         pub window_pos: Option<egui::Pos2>,
+
+        /// Perform a window visibility change.
+        ///
+        /// `None` does nothing.
+        ///
+        /// `Some(true)` will ensure the window is visible. `Some(false)` will
+        /// hide the window.
+        pub window_visibility: Option<bool>,
     }
 }
