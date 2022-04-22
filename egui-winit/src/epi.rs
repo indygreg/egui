@@ -99,6 +99,7 @@ pub fn handle_app_output(
         decorated,
         drag_window,
         window_pos,
+        window_focus,
         window_visibility,
     } = app_output;
 
@@ -133,6 +134,10 @@ pub fn handle_app_output(
 
     if drag_window {
         let _ = window.drag_window();
+    }
+
+    if window_focus {
+        window.focus_window();
     }
 }
 

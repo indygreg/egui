@@ -270,6 +270,7 @@ impl AppRunner {
                 drag_window: _,  // Can't be dragged
                 window_pos: _,   // Can't set position of a web page
                 window_visibility: _, // Can't be made invisible.
+                window_focus: _, // Can't focus window.
             } = app_output;
         }
 

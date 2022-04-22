@@ -350,6 +350,11 @@ impl Frame {
     pub fn set_window_visibility(&mut self, visibility: Option<bool>) {
         self.output.window_visibility = visibility;
     }
+
+    /// Whether the window should steal focus.
+    pub fn set_window_focus(&mut self, value: bool) {
+        self.output.window_focus = value;
+    }
 }
 
 /// Information about the web environment (if applicable).
@@ -528,5 +533,8 @@ pub mod backend {
         /// `Some(true)` will ensure the window is visible. `Some(false)` will
         /// hide the window.
         pub window_visibility: Option<bool>,
+
+        /// Whether to bring window to the front and set focus.
+        pub window_focus: bool,
     }
 }
